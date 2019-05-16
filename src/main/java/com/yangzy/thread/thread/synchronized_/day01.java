@@ -1,4 +1,4 @@
-package com.yangzy.thread.thread.synchronize;
+package com.yangzy.thread.thread.synchronized_;
 
 import org.junit.Test;
 
