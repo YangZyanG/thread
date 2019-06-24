@@ -189,19 +189,33 @@ public class day01 {
      */
 
     public static void main(String[] args) {
-        Queue<Integer> queue = new LinkedBlockingQueue<Integer>();
+//        Queue<Integer> queue = new LinkedBlockingQueue<Integer>();
+//        for (int i=0; i<1000; ++i){
+//            queue.add(i);
+//        }
+//
+//        DataQueue data = new DataQueue();
+//        data.setQueue(queue);
+//
+//        ThreadPoolExecutor executor = Pool.getInstance();
+//        ParseData parseData = new ParseData(data);
+//
+//        for (int i=0; i<10; ++i){
+//            executor.execute(parseData);
+//        }
+
+        int[] array = new int[1000];
         for (int i=0; i<1000; ++i){
-            queue.add(i);
+            array[i] = i;
         }
 
-        DataQueue data = new DataQueue();
-        data.setQueue(queue);
+        DataArray dataArray = new DataArray(array);
 
         ThreadPoolExecutor executor = Pool.getInstance();
-        ParseData parseData = new ParseData(data);
+        ParseArrayData parseArrayData = new ParseArrayData(dataArray);
 
         for (int i=0; i<10; ++i){
-            executor.execute(parseData);
+            executor.execute(parseArrayData);
         }
     }
 }
