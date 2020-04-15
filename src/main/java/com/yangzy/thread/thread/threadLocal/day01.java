@@ -89,7 +89,7 @@ public class day01<T> {
 
     @Test
     public void method1() throws InterruptedException {
-        day01 day01 = new day01();
+        final day01 day01 = new day01();
 
         day01.set();
         System.out.println(day01.getLong());
