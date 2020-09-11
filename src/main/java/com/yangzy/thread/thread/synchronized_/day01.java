@@ -2,8 +2,9 @@ package com.yangzy.thread.thread.synchronized_;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 /***
  * 虽然多线程编程极大地提高了效率，但是也会带来一定的隐患。
@@ -205,5 +206,71 @@ public class day01 {
      * 重量级锁：储存的是指向重量级锁OS互斥量的指针。
      */
 
+    @Test
+    public void test(){
+        Map<String, StringBuilder> map = new HashMap<>();
+        map.put("1", new StringBuilder("a"));
+        map.put("2", new StringBuilder("b"));
+        map.put("3", new StringBuilder("c"));
 
+        Map<String, StringBuilder> unmodifiableMap = Collections.unmodifiableMap(map);
+//        unmodifiableMap.put("4", new StringBuilder("d"));
+//        unmodifiableMap为视图，只读，上面代码放开会直接抛错
+
+        unmodifiableMap.get("1").append("_new");
+        System.out.println(unmodifiableMap.get("1"));
+        System.out.println(map.get("1"));
+    }
+
+    @Test
+    public void test_1(){
+        Executor executor = Executors.newFixedThreadPool(100);
+        for (int i=0; i<10000; ++i){
+            executor.execute(new Runnable() {
+                @Override
+                public void run() {
+                    System.out.println(Thread.currentThread().getId());
+                }
+            });
+        }
+    }
+
+    @Test
+    public void test_2(){
+        Executor executor = Executors.newCachedThreadPool();
+        for (int i=0; i<10000; ++i){
+            executor.execute(new Runnable() {
+                @Override
+                public void run() {
+                    System.out.println(Thread.currentThread().getId());
+                }
+            });
+        }
+    }
+
+    @Test
+    public void test_3(){
+        Executor executor = Executors.newSingleThreadExecutor();
+        for (int i=0; i<10000; ++i){
+            executor.execute(new Runnable() {
+                @Override
+                public void run() {
+                    System.out.println(Thread.currentThread().getId());
+                }
+            });
+        }
+    }
+
+    @Test
+    public void test_4(){
+        Executor executor = Executors.newScheduledThreadPool(100);
+        for (int i=0; i<10000; ++i){
+            executor.execute(new Runnable() {
+                @Override
+                public void run() {
+                    System.out.println(Thread.currentThread().getId());
+                }
+            });
+        }
+    }
 }
